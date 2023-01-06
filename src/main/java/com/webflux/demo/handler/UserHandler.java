@@ -16,23 +16,23 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 @Component
 public class UserHandler {
 
-    private static final Mono<ServerResponse> EMPTY_RESPONSE = ServerResponse.notFound().build();
+    private static final Mono<ServerResponse> NOT_FOUND_RESPONSE = ServerResponse.notFound().build();
     private final UserService userService;
 
-    public Mono<ServerResponse> getAllUsers(ServerRequest serverRequest) {
+    public Mono<ServerResponse> getAllUsers(ServerRequest request) {
         return ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(userService.getAllUsers(), User.class);
     }
 
-    public Mono<ServerResponse> getUserById(ServerRequest serverRequest) {
-        String userId = serverRequest.pathVariable("id");
+    public Mono<ServerResponse> getUserById(ServerRequest request) {
+        String userId = request.pathVariable("id");
         return userService.findById(userId)
                 .flatMap((user) ->
                         ServerResponse.ok()
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .bodyValue(user))
-                .switchIfEmpty(EMPTY_RESPONSE);
+                .switchIfEmpty(NOT_FOUND_RESPONSE);
     }
 
     public Mono<ServerResponse> create(ServerRequest request) {
@@ -43,6 +43,33 @@ public class UserHandler {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(userService.createUser(u), User.class)
                 );
+    }
+
+    public Mono<ServerResponse> updateUserById(ServerRequest request) {
+        String userId = request.pathVariable("id");
+        Mono<User> updateUser = request.bodyToMono(User.class);
+        return updateUser
+                .flatMap(user -> ServerResponse
+                        .ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(userService.updateUser(userId, user), User.class)
+                );
+    }
+
+    public Mono<ServerResponse> deleteUser(ServerRequest request) {
+        String userId = request.pathVariable("id");
+        return userService.deleteUser(userId)
+                .flatMap(deletedUser -> ServerResponse
+                        .status(HttpStatus.ACCEPTED)
+                        .bodyValue(deletedUser))
+                .switchIfEmpty(NOT_FOUND_RESPONSE);
+    }
+
+    public Mono<ServerResponse> getAllUsersByName(ServerRequest request) {
+        String username = request.pathVariable("username");
+        return ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(userService.findByName(username), User.class);
     }
 
 }
