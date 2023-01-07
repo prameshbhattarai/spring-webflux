@@ -5,7 +5,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@EqualsAndHashCode(of = {"id","name","department"})
+@Builder
+@EqualsAndHashCode(of = {"id", "name", "department"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(value = "users")

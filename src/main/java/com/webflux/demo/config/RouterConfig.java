@@ -14,7 +14,7 @@ public class RouterConfig {
     @Bean
     public RouterFunction<ServerResponse> routes(UserHandler userHandler) {
         return route(GET("/handler/users"), userHandler::getAllUsers)
-                .andRoute(GET("/handler/users/username/{username}"), userHandler::getAllUsersByName)
+                .andRoute(GET("/handler/users/name/{name}"), userHandler::getAllUsersByName)
                 .andRoute(GET("/handler/users/{id}"), userHandler::getUserById)
                 .andRoute(PUT("/handler/users/{id}"), userHandler::updateUserById)
                 .andRoute(DELETE("/handler/users/{id}"), userHandler::deleteUser)

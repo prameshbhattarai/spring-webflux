@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.webflux.demo.handler.UserHandlerTestIT" tests="6" skipped="0" failures="0" errors="0" timestamp="2023-01-07T17:35:38" hostname="MBPsomtairmee22.lan" time="0.262">
+  <properties/>
+  <testcase name="testGetAllUsers()" classname="com.webflux.demo.handler.UserHandlerTestIT" time="0.183"/>
+  <testcase name="testUpdateUserById()" classname="com.webflux.demo.handler.UserHandlerTestIT" time="0.024"/>
+  <testcase name="testGetAllUsersByName()" classname="com.webflux.demo.handler.UserHandlerTestIT" time="0.004"/>
+  <testcase name="testCreateUser()" classname="com.webflux.demo.handler.UserHandlerTestIT" time="0.005"/>
+  <testcase name="testDeleteUserById()" classname="com.webflux.demo.handler.UserHandlerTestIT" time="0.003"/>
+  <testcase name="testGetUserById()" classname="com.webflux.demo.handler.UserHandlerTestIT" time="0.037"/>
+  <system-out><![CDATA[18:35:37.291 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.webflux.demo.handler.UserHandlerTestIT]: no resource found for suffixes {-context.xml, Context.groovy}.
+18:35:37.334 [Test worker] DEBUG org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTestContextBootstrapper - Using ContextCustomizers for test class [UserHandlerTestIT]: [DisableAutoConfigurationContextCustomizer, DisableObservabilityContextCustomizer, TypeExcludeFiltersContextCustomizer, PropertyMappingContextCustomizer, Customizer, ImportsContextCustomizer, ExcludeFilterContextCustomizer, DuplicateJsonObjectContextCustomizer, MockitoContextCustomizer]
+18:35:37.346 [Test worker] DEBUG org.springframework.test.context.util.TestContextSpringFactoriesUtils - Skipping candidate TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener] due to a missing dependency. Specify custom TestExecutionListener classes or make the default TestExecutionListener classes and their required dependencies available. Offending class: [jakarta/servlet/ServletContext]
+18:35:37.356 [Test worker] DEBUG org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTestContextBootstrapper - Using TestExecutionListeners for test class [UserHandlerTestIT]: [DirtiesContextBeforeModesTestExecutionListener, ApplicationEventsTestExecutionListener, MockitoTestExecutionListener, DependencyInjectionTestExecutionListener, DirtiesContextTestExecutionListener, TransactionalTestExecutionListener, SqlScriptsTestExecutionListener, EventPublishingTestExecutionListener, RestDocsTestExecutionListener, MockRestServiceServerResetTestExecutionListener, MockMvcPrintOnlyOnFailureTestExecutionListener, WebDriverTestExecutionListener, MockWebServiceServerTestExecutionListener, ResetMocksTestExecutionListener]
+18:35:37.357 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: class [UserHandlerTestIT], class annotated with @DirtiesContext [false] with mode [null]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.0.1)
+
+2023-01-07T18:35:37.695+01:00  INFO 18815 --- [    Test worker] c.w.demo.handler.UserHandlerTestIT       : Starting UserHandlerTestIT using Java 17.0.4 with PID 18815 (started by praemashairmee22 in /Users/praemashairmee22/Documents/workspace/warmup/webflux)
+2023-01-07T18:35:37.695+01:00  INFO 18815 --- [    Test worker] c.w.demo.handler.UserHandlerTestIT       : No active profile set, falling back to 1 default profile: "default"
+2023-01-07T18:35:38.697+01:00  INFO 18815 --- [    Test worker] c.w.demo.handler.UserHandlerTestIT       : Started UserHandlerTestIT in 1.305 seconds (process running for 2.027)
+]]></system-out>
+  <system-err><![CDATA[[2023.01.07 18:35:37] (Coverage): Error during class instrumentation: org.springframework.boot.logging.log4j2.Log4J2LoggingSystem: java.lang.RuntimeException: java.io.IOException: Class org/apache/logging/log4j/core/config/composite/CompositeConfiguration not found
+[2023.01.07 18:35:37] (Coverage): Error during class instrumentation: org.springframework.web.reactive.config.WebFluxConfigurationSupport: java.lang.RuntimeException: java.io.IOException: Class jakarta/validation/ValidatorFactory not found
+[2023.01.07 18:35:38] (Coverage): Error during class instrumentation: reactor.core.publisher.ContextPropagation: java.lang.RuntimeException: java.io.IOException: Class io/micrometer/context/ContextRegistry not found
+]]></system-err>
+</testsuite>

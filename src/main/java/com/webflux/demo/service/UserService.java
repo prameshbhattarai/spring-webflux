@@ -14,19 +14,19 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public Mono<User> createUser(User user){
+    public Mono<User> createUser(User user) {
         return userRepository.save(user);
     }
 
-    public Flux<User> getAllUsers(){
+    public Flux<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public Mono<User> findById(String userId){
+    public Mono<User> getUserById(String userId) {
         return userRepository.findById(userId);
     }
 
-    public Mono<User> updateUser(String userId,  User user){
+    public Mono<User> updateUser(String userId, User user) {
         return userRepository.findById(userId)
                 .flatMap(dbUser -> {
                     dbUser.setName(user.getName());
@@ -37,13 +37,13 @@ public class UserService {
                 });
     }
 
-    public Mono<User> deleteUser(String userId){
+    public Mono<User> deleteUser(String userId) {
         return userRepository.findById(userId)
                 .flatMap(existingUser -> userRepository.delete(existingUser)
                         .then(Mono.just(existingUser)));
     }
 
-    public Flux<User> findByName(String name) {
+    public Flux<User> getUsersByName(String name) {
         return userRepository.findByName(name);
     }
 }

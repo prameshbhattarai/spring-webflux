@@ -27,7 +27,7 @@ public class UserHandler {
 
     public Mono<ServerResponse> getUserById(ServerRequest request) {
         String userId = request.pathVariable("id");
-        return userService.findById(userId)
+        return userService.getUserById(userId)
                 .flatMap((user) ->
                         ServerResponse.ok()
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -66,10 +66,10 @@ public class UserHandler {
     }
 
     public Mono<ServerResponse> getAllUsersByName(ServerRequest request) {
-        String username = request.pathVariable("username");
+        String name = request.pathVariable("name");
         return ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(userService.findByName(username), User.class);
+                .body(userService.getUsersByName(name), User.class);
     }
 
 }
