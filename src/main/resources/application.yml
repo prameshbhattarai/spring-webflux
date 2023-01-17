@@ -9,3 +9,7 @@ spring:
     url: postgresql://postgres_container:5432/postgres?schema=postgres
     username: postgres
     password: postgres
+logging:
+  level:
+    io.r2dbc.postgresql.QUERY: DEBUG
+    io.r2dbc.postgresql.PARAM: DEBUG

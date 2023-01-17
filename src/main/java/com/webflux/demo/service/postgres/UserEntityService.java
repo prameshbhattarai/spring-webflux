@@ -42,8 +42,7 @@ public class UserEntityService {
                         .then(Mono.just(existingUser)));
     }
 
-// todo
-//    public Flux<User> getUsersByName(String name) {
-//        return userRepository.findByName(name);
-//    }
+    public Flux<UserEntity> getUsersByName(String name) {
+        return userRepository.findByName(name);
+    }
 }

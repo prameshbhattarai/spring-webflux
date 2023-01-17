@@ -1,6 +1,7 @@
 package com.webflux.demo.model.postgres;
 
 import lombok.*;
+import org.springframework.data.annotation.Id;
 
 @Data
 @Builder
@@ -8,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserEntity {
+    @Id
     private String id;
     private String name;
     private int age;
