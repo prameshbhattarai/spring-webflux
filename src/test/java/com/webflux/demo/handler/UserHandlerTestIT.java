@@ -1,8 +1,8 @@
 package com.webflux.demo.handler;
 
 import com.webflux.demo.config.RouterConfig;
-import com.webflux.demo.model.User;
-import com.webflux.demo.service.UserService;
+import com.webflux.demo.model.mongo.UserDocument;
+import com.webflux.demo.service.mongo.UserDocumentService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatcher;
@@ -30,21 +30,21 @@ public class UserHandlerTestIT {
     private static final String UPDATE_USER_BY_ID = "/handler/users/{id}";
     private static final String DELETE_USER_BY_ID = "/handler/users/{id}";
     private static final String CREATE_USER = "/handler/users";
-    private static final User user = User.builder()
+    private static final UserDocument user = UserDocument.builder()
             .id("001")
             .name("pramesh")
             .age(30)
             .department("IT")
             .salary(45000)
             .build();
-    private static final ArgumentMatcher<User> USER_ARGUMENT_MATCHER = (arg) ->
+    private static final ArgumentMatcher<UserDocument> USER_ARGUMENT_MATCHER = (arg) ->
             arg.getName().equals("pramesh") &&
                     arg.getAge() == 30 &&
                     arg.getDepartment().equals("IT") &&
                     arg.getSalary() == 45000;
 
     @MockBean
-    private UserService userService;
+    private UserDocumentService userService;
 
     @Autowired
     private WebTestClient client;
@@ -72,7 +72,7 @@ public class UserHandlerTestIT {
 
         client.get().uri(GET_ALL_USERS).exchange()
                 .expectStatus().is2xxSuccessful()
-                .expectBodyList(User.class);
+                .expectBodyList(UserDocument.class);
 
         Mockito.verify(userService).getAllUsers();
     }
@@ -128,7 +128,7 @@ public class UserHandlerTestIT {
 
         client.get().uri(GET_ALL_USER_BY_NAME, user.getName()).exchange()
                 .expectStatus().is2xxSuccessful()
-                .expectBodyList(User.class);
+                .expectBodyList(UserDocument.class);
 
         Mockito.verify(userService).getUsersByName(Mockito.eq(user.getName()));
     }

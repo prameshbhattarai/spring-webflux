@@ -1,13 +1,13 @@
-package com.webflux.demo.dao;
+package com.webflux.demo.dao.mongo;
 
-import com.webflux.demo.model.User;
+import com.webflux.demo.model.mongo.UserDocument;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 
 @Repository
-public interface UserRepository extends ReactiveMongoRepository<User, String> {
+public interface UserDocumentRepository extends ReactiveMongoRepository<UserDocument, String> {
     @Query(value = "{name: { $regex: ?0 }}", sort = "{age: 1}")
-    Flux<User> findByName(String name);
+    Flux<UserDocument> findByName(String name);
 }

@@ -1,7 +1,7 @@
 package com.webflux.demo.handler;
 
-import com.webflux.demo.model.User;
-import com.webflux.demo.service.UserService;
+import com.webflux.demo.model.mongo.UserDocument;
+import com.webflux.demo.service.mongo.UserDocumentService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,12 +17,12 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 public class UserHandler {
 
     private static final Mono<ServerResponse> NOT_FOUND_RESPONSE = ServerResponse.notFound().build();
-    private final UserService userService;
+    private final UserDocumentService userService;
 
     public Mono<ServerResponse> getAllUsers(ServerRequest request) {
         return ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(userService.getAllUsers(), User.class);
+                .body(userService.getAllUsers(), UserDocument.class);
     }
 
     public Mono<ServerResponse> getUserById(ServerRequest request) {
@@ -36,23 +36,23 @@ public class UserHandler {
     }
 
     public Mono<ServerResponse> create(ServerRequest request) {
-        Mono<User> user = request.bodyToMono(User.class);
+        Mono<UserDocument> user = request.bodyToMono(UserDocument.class);
         return user
                 .flatMap(u -> ServerResponse
                         .status(HttpStatus.CREATED)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(userService.createUser(u), User.class)
+                        .body(userService.createUser(u), UserDocument.class)
                 );
     }
 
     public Mono<ServerResponse> updateUserById(ServerRequest request) {
         String userId = request.pathVariable("id");
-        Mono<User> updateUser = request.bodyToMono(User.class);
+        Mono<UserDocument> updateUser = request.bodyToMono(UserDocument.class);
         return updateUser
                 .flatMap(user -> ServerResponse
                         .ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(userService.updateUser(userId, user), User.class)
+                        .body(userService.updateUser(userId, user), UserDocument.class)
                 );
     }
 
@@ -69,7 +69,7 @@ public class UserHandler {
         String name = request.pathVariable("name");
         return ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(userService.getUsersByName(name), User.class);
+                .body(userService.getUsersByName(name), UserDocument.class);
     }
 
 }

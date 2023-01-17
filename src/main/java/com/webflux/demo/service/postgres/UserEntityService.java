@@ -1,32 +1,31 @@
-package com.webflux.demo.service;
+package com.webflux.demo.service.postgres;
 
-import com.webflux.demo.dao.UserRepository;
-import com.webflux.demo.model.User;
+import com.webflux.demo.dao.postgres.UserEntityRepository;
+import com.webflux.demo.model.postgres.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-
 @RequiredArgsConstructor
 @Service
-public class UserService {
+public class UserEntityService {
 
-    private final UserRepository userRepository;
+    private final UserEntityRepository userRepository;
 
-    public Mono<User> createUser(User user) {
+    public Mono<UserEntity> createUser(UserEntity user) {
         return userRepository.save(user);
     }
 
-    public Flux<User> getAllUsers() {
+    public Flux<UserEntity> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public Mono<User> getUserById(String userId) {
+    public Mono<UserEntity> getUserById(String userId) {
         return userRepository.findById(userId);
     }
 
-    public Mono<User> updateUser(String userId, User user) {
+    public Mono<UserEntity> updateUser(String userId, UserEntity user) {
         return userRepository.findById(userId)
                 .flatMap(dbUser -> {
                     dbUser.setName(user.getName());
@@ -37,13 +36,14 @@ public class UserService {
                 });
     }
 
-    public Mono<User> deleteUser(String userId) {
+    public Mono<UserEntity> deleteUser(String userId) {
         return userRepository.findById(userId)
                 .flatMap(existingUser -> userRepository.delete(existingUser)
                         .then(Mono.just(existingUser)));
     }
 
-    public Flux<User> getUsersByName(String name) {
-        return userRepository.findByName(name);
-    }
+// todo
+//    public Flux<User> getUsersByName(String name) {
+//        return userRepository.findByName(name);
+//    }
 }
