@@ -6,7 +6,7 @@ spring:
       uri: mongodb://localhost:27017/test
       database: test
   r2dbc:
-    url: postgresql://postgres_container:5432/postgres?schema=postgres
+    url: r2dbc:postgresql://postgres_container:5432/postgres?schema=postgres
     username: postgres
     password: postgres
 logging:
